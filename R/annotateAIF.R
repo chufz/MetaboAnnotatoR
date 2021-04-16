@@ -17,7 +17,8 @@
 #' @param nCE Number of Collision Energy levels depending on the MS system used
 #' Waters, Bruker (QToF) and Thermo Orbitrap = 1, Agilent (QToF) > 1, however,
 #' only the highest energy level will be considered
-#' @param corThresh Pearson correlation coefficient for EIC correlation.
+#' @param corThresh1 Pearson correlation coefficient for MS1 EIC correlation.
+#' @param corThresh2 Pearson correlation coefficient for MS2 EIC correlation.
 #' @param checkIsotope Whether or not to check the isotope type;
 #' default is set to TRUE
 #' @param tolerance Tolerance in ppm for the candidate search.
@@ -39,7 +40,8 @@ annotateAIF <- function(targetTable = NULL,
                         ESImode = "POS",
                         RTfile = "none",
                         nCE = 1,
-                        corThresh = 0.8,
+                        corThresh1 = 0.8,
+                        corThresh2 = 0.8,
 					              checkIsotope = TRUE,
 					              tolerance = 25,
 					              maxMZdiff = 0.01,
@@ -192,8 +194,8 @@ for (i in 1:dim(targets)[1]){
 	message("Obtaining pseudo-MS/MS spectrum...")
 	try(
 	  specs <- getPseudoMSMS(fmz, frt, xcmsF1, xcmsF2, peaksF1, peaksF2,
-	                         filetype = filetype, nCE = 1, cthres1 = corThresh,
-	                         cthres2 = corThresh, plotResults = TRUE, SpName,
+	                         filetype = filetype, nCE = 1, cthres1 = corThresh1,
+	                         cthres2 = corThresh2, plotResults = TRUE, SpName,
 	                         DirPath)
 	)
 
@@ -337,7 +339,8 @@ for (i in 1:dim(targets)[1]){
                           ".csv", sep = ""), row.names = FALSE)
 	# save general options
 	df <- data.frame(targetsTable_file = targetTable, libraries = libs,
-	                 ESImode = ESImode, RTfile = RTfile, corThresh = corThresh,
+	                 ESImode = ESImode, RTfile = RTfile, corThresh1 = corThresh1,
+	                 corThresh2 = corThresh2,
 	                 checkIsotope = checkIsotope, matchWeight = matchWeight,
 	                 tolerance = paste(tolerance, "ppm"),
 	                 maxMZdiff = paste(maxMZdiff, "Da"), row.names = "Option")
