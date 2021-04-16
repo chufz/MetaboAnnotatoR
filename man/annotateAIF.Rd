@@ -11,7 +11,8 @@ annotateAIF(
   ESImode = "POS",
   RTfile = "none",
   nCE = 1,
-  corThresh = 0.8,
+  corThresh1 = 0.8,
+  corThresh2 = 0.8,
   checkIsotope = TRUE,
   tolerance = 25,
   maxMZdiff = 0.01,
@@ -36,7 +37,9 @@ Times in seconds.}
 Waters, Bruker (QToF) and Thermo Orbitrap = 1, Agilent (QToF) > 1, however,
 only the highest energy level will be considered}
 
-\item{corThresh}{Pearson correlation coefficient for EIC correlation.}
+\item{corThresh1}{Pearson correlation coefficient for MS1 EIC correlation.}
+
+\item{corThresh2}{Pearson correlation coefficient for MS2 EIC correlation.}
 
 \item{checkIsotope}{Whether or not to check the isotope type;
 default is set to TRUE}
